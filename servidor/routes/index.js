@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+// var sortArray = require("../helpers/utils");
 
 router.get('/', function(req, res) {
   res.send('respond with a resource');
@@ -14,10 +15,10 @@ router.get('/api/items', function(req, res){
   .get('https://api.mercadolibre.com/sites/MLA/search?limit=4&q=' + q )
   .then(function (theResult) {
     
-    const categories = theResult.data.available_filters;
-    
+    const categories = theResult.data.available_filters; 
     const showCategories = categories.map(function (p) {
-      return {          
+      return {      
+        // sortArray(theCategories)    
           categories: p.values.sort((a,b) => (a.results > b.results) ? 1 : ((b.results > a.results) ? -1 : 0))      
         };              
     })  
@@ -72,13 +73,14 @@ router.get('/api/items/:id', function(req, res) {
                   amount: String(resultProductProp.price).split(".")[0],
                   decimal: String(resultProductProp.price).split(".")[1] || "0"
                 },
-                picture: resultProductProp.thumbnail,
+                picture: resultProductProp.picture,
                 condition: resultProductProp.condition,
                 shipping: resultProductProp.shipping.free_shipping,
-                sold_quantity: resultProductProp.sold_quantity
+                sold_quantity: resultProductProp.sold_quantity,
+                description: resultDescription.data.plain_text
               },
               categoryId: category,
-              description: resultDescription.data.plain_text,
+              
             }
         res.json(myProducts)
       })

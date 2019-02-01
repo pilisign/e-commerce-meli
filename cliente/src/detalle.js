@@ -1,53 +1,56 @@
-import React, { Component} from 'react';
-import { NavLink } from "react-router-dom";
+import React, { Component } from 'react';
+import Header from './header';
 
 class Detalle extends Component {
 
-    constructor (props) {
-        super(props)
-        // aca voy a guardar el producto
+    constructor (props){
+        super (props)
         this.state = {
-            book : {
-                authors: []
-            },
+            producto:{},
             loading: true
         }
     }
-
-    componentDidMount (){
-        fetch('http://localhost:3000/api/books/' + this.props.match.params.isbn)
+   
+    componentDidMount () {
+        fetch('http://localhost:8080/api/items/' + this.props.match.params.id)
         .then(res => res.json())
         .then(data => {
+            console.log('mostrar algo', data)
             this.setState({
-                book : data,
-                loading: false         
+                producto: data.item,
+                categories: data.categories,
+                loading: false
             })
-        })    
+        })
     }
-
-  render() {
-      if (this.state.loading) {
-          return <img alt="loading" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-      }
-      return ( 
-        <header className="w3-container w3-teal w3-center w3-margin-top">
-            <div className="detail">
-                <h1>{this.state.book.title}</h1>
-                <img className="img-detail" alt="cover" src={this.state.book.cover} />
-                <div>isbn: {this.state.book.isbn}</div>
-                <div>subtitulo: {this.state.book.subtitle}</div>
-                <div>description: {this.state.book.description}</div>
-                <ul>
-                    autores: {this.state.book.authors.map(author => <li>{author}</li>)}
-                </ul>
-
-              
-            
+    render() {
+        if (this.state.loading) {
+            return <img alt="travolta" src="https://media.giphy.com/media/rCAVWjzASyNlm/giphy.gif" />
+        }
+        return (
+            <div>
+               <Header categories={this.state.categories} />
+                <div className="detail-container">
+                <div className="detail-description">
+                    <div className="detail-img"><img alt="picture" src={this.state.producto.picture[0].secure_url} /></div>
+                    <div className="detail-items">
+                        <span>{this.state.producto.condition} - </span>
+                        <span>{this.state.producto.sold_quantity} vendidos</span>
+                        <h4 className="detail-title">{this.state.producto.title}</h4>
+                        <h2>${this.state.producto.price.amount}</h2>
+                        <button className="detail-btn">Comprar</button>
+                    </div> 
+                </div>
+                <div>
+                <div className="detail-description-text">
+                    <h2>Descripción del Producto</h2>
+                    <p>{this.state.producto.description}</p>
+                </div>
+                </div>
+                </div>
             </div>
-        </header>
-      )
+        );
     }
 }
-
 
 export default Detalle;
