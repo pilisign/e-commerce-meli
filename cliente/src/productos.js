@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from './header';
+// import Header from './header';
 import Shipping from './img/Icono_Envio.png';
 // import { Button } from "react-bootstrap";
 
@@ -8,7 +8,7 @@ const Productos = props => {
   return (
     <section className="big-products-container">
      
-      <Header />
+      {/* <Header /> */}
       {props.productos.map((prod, index) => {
         return (
           <div key={`producto-${index}`}>

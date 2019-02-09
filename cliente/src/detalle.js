@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './header';
+// import Header from './header';
 
 class Detalle extends Component {
 
@@ -16,11 +16,13 @@ class Detalle extends Component {
         .then(res => res.json())
         .then(data => {
             console.log('mostrar algo', data)
+            
             this.setState({
                 producto: data.item,
                 categories: data.categories,
                 loading: false
             })
+            console.log('esto es producto', data.item)
         })
     }
     render() {
@@ -29,10 +31,11 @@ class Detalle extends Component {
         }
         return (
             <div>
-               <Header categories={this.state.categories} />
+                {/* <Header /> */}
+               {/* <Header categories={this.state.categories} /> */}
                 <div className="detail-container">
                 <div className="detail-description">
-                    <div className="detail-img"><img alt="picture" src={this.state.producto.picture[0].secure_url} /></div>
+                    <div className="detail-img"><img alt="picture" src={this.state.producto.pictures[0].url} /></div>
                     <div className="detail-items">
                         <span>{this.state.producto.condition} - </span>
                         <span>{this.state.producto.sold_quantity} vendidos</span>

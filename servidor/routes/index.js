@@ -1,4 +1,4 @@
-// archivo posta para pegarle a la API
+
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
@@ -49,7 +49,6 @@ router.get('/api/items', function(req, res){
 
 // call item
 router.get('/api/items/:id', function(req, res) {
-  //el param forman parte del path, no son cosas que nosotros le ponemos en la ruta
   const id = req.params.id
   axios.get('https://api.mercadolibre.com/items/' + id)
   .then(resultProduct => {
@@ -73,7 +72,7 @@ router.get('/api/items/:id', function(req, res) {
                   amount: String(resultProductProp.price).split(".")[0],
                   decimal: String(resultProductProp.price).split(".")[1] || "0"
                 },
-                picture: resultProductProp.picture,
+                pictures: resultProductProp.pictures,
                 condition: resultProductProp.condition,
                 shipping: resultProductProp.shipping.free_shipping,
                 sold_quantity: resultProductProp.sold_quantity,
