@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Header from './header';
+import Header from './header';
 
 class Detalle extends Component {
 
@@ -7,6 +7,7 @@ class Detalle extends Component {
         super (props)
         this.state = {
             producto:{},
+            categories: [],
             loading: true
         }
     }
@@ -15,24 +16,27 @@ class Detalle extends Component {
         fetch('http://localhost:8080/api/items/' + this.props.match.params.id)
         .then(res => res.json())
         .then(data => {
-            console.log('mostrar algo', data)
+            console.log('show data', data)
             
             this.setState({
                 producto: data.item,
                 categories: data.categories,
                 loading: false
             })
-            console.log('esto es producto', data.item)
+            console.log('product', data.item)
+            console.log ('categories', data.categories)
         })
     }
+    
     render() {
+
         if (this.state.loading) {
-            return <img alt="travolta" src="https://media.giphy.com/media/rCAVWjzASyNlm/giphy.gif" />
+            return <img alt="loading" src="https://media.giphy.com/media/rCAVWjzASyNlm/giphy.gif" />
         }
+
         return (
             <div>
-                {/* <Header /> */}
-               {/* <Header categories={this.state.categories} /> */}
+               <Header categories={this.state.categories} />
                 <div className="detail-container">
                 <div className="detail-description">
                     <div className="detail-img"><img alt="picture" src={this.state.producto.pictures[0].url} /></div>

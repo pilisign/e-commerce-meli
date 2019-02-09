@@ -14,6 +14,7 @@
 
 .App {
   background-color: #e1e1e1;
+  padding-bottom: 50px;
 }
 
 img {
@@ -32,23 +33,28 @@ img {
   font-weight: 800;
   text-decoration: none;
 }
-.breadcrumb a {
+.breadcrumb li {
+  display: inline-block;
+  flex-direction: row;
   text-decoration: none;
   margin: 0 10px;
   color: #666;
 }
-.breadcrumb a:first-of-type:after {
+.breadcrumb li:first-of-type:after {
   content: " >";
   word-spacing: 0.9em;
 }
-.breadcrumb a:after {
+.breadcrumb li:after {
   content: " >";
   word-spacing: 0.9em;
   font-weight: normal;
 }
-.breadcrumb a:last-of-type:after {
+.breadcrumb li:last-of-type:after {
   content: "";
   word-spacing: 0.6em;
+}
+.breadcrumb li:last-of-type {
+  font-weight: bold;
 }
 
 .search_box {
@@ -108,14 +114,16 @@ a {
   display: flex;
   justify-content: flex-start;
   margin: 15px 20px;
+  width: 500px;
 }
 .big-products-container .products-container .product-shipping {
   width: 20px;
 }
 
 .thumbnail-product {
-  width: 20%;
+  width: 15%;
   height: auto;
+  margin: 20px;
 }
 
 .detail-container {
