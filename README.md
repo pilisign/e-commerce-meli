@@ -2,6 +2,9 @@
 
 This project was built with Node.js + React.js. It consists in an e-commerce app that request an API of Mercadolibre.
 
+### Preview
+![screenshoot](https://github.com/pilisign/e-commerce-meli/blob/master/product-detail.png)
+
 - To run the project you will need to clone this repository then go to /servidor
 and run PORT=8080 npm run start
 
